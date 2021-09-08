@@ -1,5 +1,6 @@
-import React, { useState, useEffect, Fragment } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import GameList from '../components/GamesList';
 const Game = () => {
   const [userEmail, setUserEmail] = useState('');
   const [loading, setLoading] = useState(true);
@@ -28,10 +29,11 @@ const Game = () => {
   return (
     <div>
       {loading === false && (
-        <Fragment>
+        <>
           <h1>Game</h1>
-          <h2>Hello {userEmail}!</h2>
-        </Fragment>
+          <h2>Hello {userEmail}! your games:</h2>
+          <GameList />
+        </>
       )}
     </div>
   );

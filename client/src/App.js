@@ -1,9 +1,9 @@
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Navbar from './components/layout/Navbar';
-import Login from './views/auth/Login';
-import Signup from './views/auth/Signup';
-import Logout from './views/auth/Logout';
-import Game from './views/app/Game';
+import Login from './pages/Login'
+import Signup from './pages/Signup';
+import Logout from './pages/Logout';
+import Game from './pages/Game';
 
 const App = () => {
   return (

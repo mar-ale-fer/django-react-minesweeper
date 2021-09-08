@@ -19,4 +19,4 @@ class Game (models.Model):
         return f'({self.id}) user:{self.useremail} rows: {self.rows} columns: {self.columns} mines:{self.mines} start: {self.start}'
     @property
     def start_str(self):
-        return f'{self.start}'
+        return f'{self.start.strftime("%m/%d/%Y, %H:%M")}'

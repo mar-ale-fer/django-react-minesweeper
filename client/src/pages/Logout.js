@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Fragment } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const Logout = () => {
@@ -25,19 +25,37 @@ const Logout = () => {
     })
     .then(response => response.data)
       .then(data => {
-        console.log(data);
         localStorage.clear();
         window.location.replace('http://localhost:3000/login');
       });
+
+      const responseSuccessHandler = response => {
+        return response;
+      };
+      
+      //If an error occurs with the token in logout, then go to login
+      const responseErrorHandler = error => {
+        if (error.response.status === 401) {
+          localStorage.clear();
+          window.location.replace('http://localhost:3000/login');
+        }
+      
+        return Promise.reject(error);
+      }
+      
+      axios.interceptors.response.use(
+        response => responseSuccessHandler(response),
+        error => responseErrorHandler(error)
+      );
   };
 
   return (
     <div>
       {loading === false && (
-        <Fragment>
+        <>
           <h1>Are you sure you want to logout?</h1>
           <input type='button' value='Logout' onClick={handleLogout} />
-        </Fragment>
+        </>
       )}
     </div>
   );
