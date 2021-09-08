@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 const Signup = () => {
   const [email, setEmail] = useState('');
@@ -9,7 +10,7 @@ const Signup = () => {
 
   useEffect(() => {
     if (localStorage.getItem('token') !== null) {
-      window.location.replace('http://localhost:3000/dashboard');
+      window.location.replace('http://localhost:3000/game');
     } else {
       setLoading(false);
     }
@@ -24,19 +25,20 @@ const Signup = () => {
       password2: password2
     };
 
-    fetch('http://127.0.0.1:8000/api/v1/users/auth/register/', {
-      method: 'POST',
+    axios({
+      method: 'post',
+      url: 'http://127.0.0.1:8000/api/v1/users/auth/register/',
       headers: {
-        'Content-Type': 'application/json'
+          'content-type': 'application/json'
       },
-      body: JSON.stringify(user)
+      data: JSON.stringify(user)
     })
-      .then(res => res.json())
+      .then(response => response.data)
       .then(data => {
         if (data.key) {
           localStorage.clear();
           localStorage.setItem('token', data.key);
-          window.location.replace('http://localhost:3000/dashboard');
+          window.location.replace('http://localhost:3000/game');
         } else {
           setEmail('');
           setPassword1('');

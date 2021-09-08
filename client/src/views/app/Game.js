@@ -1,6 +1,6 @@
 import React, { useState, useEffect, Fragment } from 'react';
-
-const Dashboard = () => {
+import axios from 'axios';
+const Game = () => {
   const [userEmail, setUserEmail] = useState('');
   const [loading, setLoading] = useState(true);
 
@@ -8,14 +8,16 @@ const Dashboard = () => {
     if (localStorage.getItem('token') === null) {
       window.location.replace('http://localhost:3000/login');
     } else {
-      fetch('http://127.0.0.1:8000/api/v1/users/auth/user/', {
-        method: 'GET',
+
+      axios({
+        method: 'get',
+        url: 'http://127.0.0.1:8000/api/v1/users/auth/user/',
         headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Token ${localStorage.getItem('token')}`
+            'content-type': 'application/json',
+            Authorization: `Token ${localStorage.getItem('token')}`
         }
       })
-        .then(res => res.json())
+        .then(response => response.data)
         .then(data => {
           setUserEmail(data.email);
           setLoading(false);
@@ -27,7 +29,7 @@ const Dashboard = () => {
     <div>
       {loading === false && (
         <Fragment>
-          <h1>Dashboard</h1>
+          <h1>Game</h1>
           <h2>Hello {userEmail}!</h2>
         </Fragment>
       )}
@@ -35,4 +37,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default Game;

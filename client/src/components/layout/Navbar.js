@@ -18,7 +18,7 @@ const Navbar = () => {
           <Fragment>
             {' '}
             <li>
-              <Link to='/dashboard'>Dashboard</Link>
+              <Link to='/game'>Game</Link>
             </li>
             <li>
               <Link to='/logout'>Logout</Link>

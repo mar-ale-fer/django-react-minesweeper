@@ -3,7 +3,7 @@ import Navbar from './components/layout/Navbar';
 import Login from './views/auth/Login';
 import Signup from './views/auth/Signup';
 import Logout from './views/auth/Logout';
-import Dashboard from './views/app/Dashboard';
+import Game from './views/app/Game';
 
 const App = () => {
   return (
@@ -14,7 +14,7 @@ const App = () => {
           <Route path='/login' component={Login} exact />
           <Route path='/signup' component={Signup} exact />
           <Route path='/logout' component={Logout} exact />
-          <Route path='/dashboard' component={Dashboard} exact />
+          <Route path='/game' component={Game} exact />
         </Switch>
       </Router>
     </div>

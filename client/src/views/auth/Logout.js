@@ -1,4 +1,5 @@
 import React, { useState, useEffect, Fragment } from 'react';
+import axios from 'axios';
 
 const Logout = () => {
   const [loading, setLoading] = useState(true);
@@ -14,14 +15,15 @@ const Logout = () => {
   const handleLogout = e => {
     e.preventDefault();
 
-    fetch('http://127.0.0.1:8000/api/v1/users/auth/logout/', {
-      method: 'POST',
+    axios({
+      method: 'post',
+      url: 'http://127.0.0.1:8000/api/v1/users/auth/logout/',
       headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Token ${localStorage.getItem('token')}`
+          'content-type': 'application/json',
+          Authorization: `Token ${localStorage.getItem('token')}`
       }
     })
-      .then(res => res.json())
+    .then(response => response.data)
       .then(data => {
         console.log(data);
         localStorage.clear();
