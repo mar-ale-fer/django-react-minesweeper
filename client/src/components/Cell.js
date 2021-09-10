@@ -1,35 +1,38 @@
-  
 import React from 'react';
+import {
+	FaBomb,
+    FaFlag
+} from 'react-icons/fa';
 
-export default class Cell extends React.Component {
+const Cell = (props) => {
+    //console.log(props.cellData.isRevealed)
+    // console.log(props)
+    const getValue = () => {
+        //return ( `(${props.cellData.isRevealed})`)
 
-
-    getValue(){
-        return ( `(${this.props.value.x},${this.props.value.y})`)
-
-        if (!this.props.value.isRevealed){
-            return this.props.value.isFlagged ? "P" : null;
+        if (!props.cellData.isRevealed){
+            return props.cellData.isFlagged ? <FaFlag  className="has-text-primary" /> : null;
         }
-        if (this.props.value.isMine) {
-            return "X";
+        if (props.cellData.isMine) {
+            return <FaBomb  className="has-text-primary" />;
         }
-        if(this.props.value.minesNear === 0 ){
+        if(props.cellData.nearbyMines === 0 ){
             return null;
         }
-        return this.props.value.minesNear;
+        return props.cellData.nearbyMines;
     }
 
-    render(){
-        let className = "cell" + (this.props.value.isRevealed ? "" : " hidden") + (this.props.value.isMine ? " is-mine" : "") + (this.props.value.isFlagged ? " is-flag" : "");
+    let className = "cell" + (props.cellData.isRevealed ? "" : " hidden") + (props.cellData.isMine ? " is-mine" : "") + (props.cellData.isFlagged ? " is-flag" : "");
 
-
-        return (
-            // <div ref="cell" onClick={this.props.onClick} className={className} onContextMenu={this.props.cMenu}>
-            //     {this.getValue()} 
-            // </div>
-            <div onClick={this.props.onClick} className={className} onContextMenu={this.props.cMenu}>
-                {this.getValue()} 
-            </div>
-        );
-    }
+    return (
+        // <div ref="cell" onClick={this.props.onClick} className={className} onContextMenu={this.props.cMenu}>
+        //     {this.getValue()} 
+        // </div>
+        // <div onClick={props.onClick} className={className} onContextMenu={props.cMenu}>
+        <div className={className}>
+            {getValue()} 
+        </div>
+    );
 }
+
+export default Cell;
