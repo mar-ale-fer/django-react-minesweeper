@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
+
 const GameList = () => {
   const [gamelist, setgamelist] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -27,7 +29,9 @@ const GameList = () => {
         <>
           {gamelist.map((game, i) => (
             <div>
+              <Link to={`/board/${game.id}`}>
                 {`game #${game.id} start on:${game.start_str_ser} rows:${game.rows} columns:${game.columns} mines:${game.mines} time elapsed:${game.state_time_elapsed}`}
+              </Link>
             </div>
         ))}
         </>

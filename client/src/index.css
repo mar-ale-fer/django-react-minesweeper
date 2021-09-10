@@ -1,0 +1,40 @@
+body {
+    margin: 20px;
+    padding: 0;
+    font-family: sans-serif;
+  }
+  .clear {
+    clear: both;
+    content: ""
+  }
+  
+  .game-info {
+
+    min-height: 50px;
+  }
+  
+  .cell {
+    box-sizing: border-box;
+    background: #5cee38;
+    border: 1px solid #ffffff;
+    float: left;
+    line-height: 40px;
+    height: 40px;
+    text-align: center;
+    width: 40px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .cell:focus {
+    outline: none;
+  }
+  
+  .hidden {
+    background: #5cee38;
+  }
+  
+  .is-flag,
+  .is-mine {
+    color: #fc793c;
+  }

@@ -16,8 +16,5 @@ class GameSerializer(HyperlinkedModelSerializer):
         model = Game
         fields = ['id','useremail','rows','columns',
         'mines', 'state_time_elapsed', 'state_board',
-        'start_str_ser']
-        # fields = ['useremail', 'rows', 'columns',
-        #     'start', 'mines', 'state_time_elapsed',
-        #     'state_board']
+        'start_str_ser','state']
     

@@ -30,7 +30,7 @@ const Game = () => {
     <div>
       {loading === false && (
         <>
-          <h1>Game</h1>
+          <h1>Games</h1>
           <h2>Hello {userEmail}! your games:</h2>
           <GameList />
         </>

@@ -4,6 +4,7 @@ import Login from './pages/Login'
 import Signup from './pages/Signup';
 import Logout from './pages/Logout';
 import Game from './pages/Game';
+import Board from './pages/Board'
 
 const App = () => {
   return (
@@ -11,10 +12,22 @@ const App = () => {
       <Router>
         <Navbar />
         <Switch>
-          <Route path='/login' component={Login} exact />
-          <Route path='/signup' component={Signup} exact />
-          <Route path='/logout' component={Logout} exact />
-          <Route path='/game' component={Game} exact />
+          <Route path='/login' exact>
+             <Login />
+          </Route>
+
+          <Route path='/signup' exact>
+             <Signup />
+          </Route>
+          <Route path='/logout' exact>
+             <Logout />
+          </Route>
+          <Route path='/game' exact>
+            <Game />
+          </Route>
+          <Route path='/board/:id'>
+            <Board />
+          </Route>
         </Switch>
       </Router>
     </div>
