@@ -1,10 +1,10 @@
 import { useParams } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+
 import Cell from '../components/Cell';
 import styled from 'styled-components/macro';
-
-
+import { getGameFromBackend, saveGameInBackend } from '../MinesServer';
+import { catchErrors } from '../utils';
 const StyledGame = styled.div`
 
     max-width: ${props => (props.columns * 40)}px;
@@ -21,18 +21,13 @@ const Board = () => {
     const [forceUpdate, setForceUpdate] = useState(0);
 
     useEffect(() => {
-        axios({
-          method: 'get',
-          url: `http://127.0.0.1:8000/api/v1/users/games/${id}`,
-          headers: {
-              'content-type': 'application/json',
-              Authorization: `Token ${localStorage.getItem('token')}`
-          }
-        })
-          .then(response => response.data)
-          .then(data => {
-              setGame(data);
-          });
+
+        const fetchData = async () => {
+            const gameFromBackend = await getGameFromBackend( id );
+            setGame(gameFromBackend);
+        }
+
+        catchErrors(fetchData());
           
     }, [id]);
 
@@ -99,9 +94,30 @@ const Board = () => {
                 won: false,
                 lost: false,
                 board: initboard(rows, columns, mines),
-            }
+            };
             setGameData(newGameData);
-        }
+        } else if (game.state === 'STARTED') {
+            const newGameData = {
+                won: false,
+                lost: false,
+                board: JSON.parse(game.state_board),
+            };
+            setGameData(newGameData);    
+        } else if (game.state === 'WON') {
+            const newGameData = {
+                won: true,
+                lost: false,
+                board: JSON.parse(game.state_board),
+            };
+            setGameData(newGameData);    
+        } else if (game.state === 'LOST') { //LOST
+            const newGameData = {
+                won: false,
+                lost: true,
+                board: JSON.parse(game.state_board),
+            };
+            setGameData(newGameData);   
+        } 
         setLoading(false);
     },[game]);
 
@@ -246,6 +262,7 @@ const Board = () => {
         newGameData.won = won;
         newGameData.lost = lost;
         setGameData(newGameData);
+        saveOnBackend();
         setForceUpdate(forceUpdate+1);
 
     }
@@ -282,6 +299,7 @@ const Board = () => {
         }
         newGameData.won = won;   
         setGameData(newGameData);
+        saveOnBackend();
         setForceUpdate(forceUpdate+1);
     }
 
@@ -306,6 +324,24 @@ const Board = () => {
 
     };
 
+    const saveOnBackend = () => {
+        let newGameState = ''
+        if (gameData.won)  {
+            newGameState = 'WON'
+        } else if (gameData.lost) {
+            newGameState = 'LOST'
+        } else {
+            newGameState = 'STARTED'
+        }
+
+        const saveData = async () => {
+            const savedData = await saveGameInBackend(game.id, newGameState, gameData.board);
+            console.log(savedData);
+        }
+
+        catchErrors(saveData())
+    }
+
     return (
         <div>
           {loading === false && (
@@ -316,7 +352,11 @@ const Board = () => {
                             <div className="board">
                             <div className="game-info">
                                 <span className="info">mines: {game.mines}</span><br />
-                                <span className="info">{gameData.won ? "You Win" : ""}</span>
+                                <span className="info">{gameData.won ? "You Win!" : ""}</span>
+                                <span className="info">{gameData.lost ? "You Lose!" : ""}</span>
+                                <button onClick={()=> saveOnBackend()}>
+                                    save game
+                                </button>
                             </div>
                             {
                                 gameData && gameData.board && (
