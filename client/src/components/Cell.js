@@ -29,7 +29,7 @@ const Cell = (props) => {
         //     {this.getValue()} 
         // </div>
         // <div onClick={props.onClick} className={className} onContextMenu={props.cMenu}>
-        <div className={className}>
+        <div className={className} onClick={props.onClick} onContextMenu={props.contextMenu}>
             {getValue()} 
         </div>
     );

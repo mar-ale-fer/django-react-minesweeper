@@ -28,7 +28,7 @@ const GameList = () => {
       {loading === false && (
         <>
           {gamelist.map((game, i) => (
-            <div>
+            <div key={game.id}>
               <Link to={`/board/${game.id}`}>
                 {`game #${game.id} start on:${game.start_str_ser} rows:${game.rows} columns:${game.columns} mines:${game.mines} time elapsed:${game.state_time_elapsed}`}
               </Link>
