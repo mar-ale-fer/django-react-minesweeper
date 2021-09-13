@@ -12,7 +12,7 @@ const Navbar = () => {
 
   return (
     <nav>
-      <h1>Django React Auth</h1>
+      <h1>Minesweeper</h1>
       <ul>
         {isAuth === true ? (
           <Fragment>

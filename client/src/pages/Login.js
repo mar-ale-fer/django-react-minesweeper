@@ -21,12 +21,10 @@ const Login = () => {
       email: email,
       password: password
     };
+
     axios({
       method: 'post',
-      url: 'http://127.0.0.1:8000/api/v1/users/auth/login/',
-      headers: {
-          'content-type': 'application/json'
-      },
+      url: '/users/auth/login/',
       data: JSON.stringify(user)
     })
       .then(response => response.data)

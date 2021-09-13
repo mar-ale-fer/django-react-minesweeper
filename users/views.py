@@ -22,7 +22,7 @@ class GameViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         user = self.request.user
         print(user)
-        queryset = Game.objects.filter(useremail=user)
+        queryset = Game.objects.filter(useremail=user).order_by('-id')
         # if user is not None:
         #     queryset = queryset.filter(courses__owner_id=user.id)
         return queryset

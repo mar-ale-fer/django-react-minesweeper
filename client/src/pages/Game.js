@@ -1,38 +1,44 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import GameList from '../components/GamesList';
+import NewGameForm from '../components/NewGame';
+import { getLoggedUser } from '../MinesServer';
+import { catchErrors } from '../utils';
 const Game = () => {
   const [userEmail, setUserEmail] = useState('');
   const [loading, setLoading] = useState(true);
+  const [forceUpdate, setForceUpdate] = useState(0);
 
   useEffect(() => {
     if (localStorage.getItem('token') === null) {
       window.location.replace('http://localhost:3000/login');
     } else {
 
-      axios({
-        method: 'get',
-        url: 'http://127.0.0.1:8000/api/v1/users/auth/user/',
-        headers: {
-            'content-type': 'application/json',
-            Authorization: `Token ${localStorage.getItem('token')}`
-        }
-      })
-        .then(response => response.data)
-        .then(data => {
-          setUserEmail(data.email);
+      const fetchData = async () => {
+          const LoggedUser = await getLoggedUser( );
+          setUserEmail(LoggedUser.email);
           setLoading(false);
-        });
+      }
+
+      catchErrors(fetchData());      
+
+ 
     }
   }, []);
+
+  const handleGameListChange = () => {
+    setForceUpdate(forceUpdate+1);
+  };
 
   return (
     <div>
       {loading === false && (
         <>
           <h1>Games</h1>
+          <NewGameForm userEmail={userEmail} onGameListChange={() => handleGameListChange()} />
           <h2>Hello {userEmail}! your games:</h2>
-          <GameList />
+          
+
+          <GameList propForceUpdate={forceUpdate} onGameListChange={() => handleGameListChange()}/>
         </>
       )}
     </div>

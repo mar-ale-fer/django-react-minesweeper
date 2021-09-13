@@ -12,5 +12,5 @@ urlpatterns = [
     #path('game/', GameListView.as_view()),
     path('', include(router.urls)),
     path('auth/', include('rest_auth.urls')),
-    path('auth/register/', include('rest_auth.registration.urls'))
+    path('auth/register/', include('rest_auth.registration.urls')),
 ]

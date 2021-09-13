@@ -17,9 +17,8 @@ const Logout = () => {
 
     axios({
       method: 'post',
-      url: 'http://127.0.0.1:8000/api/v1/users/auth/logout/',
+      url: '/users/auth/logout/',
       headers: {
-          'content-type': 'application/json',
           Authorization: `Token ${localStorage.getItem('token')}`
       }
     })
@@ -29,24 +28,24 @@ const Logout = () => {
         window.location.replace('http://localhost:3000/login');
       });
 
-      const responseSuccessHandler = response => {
-        return response;
-      };
-      
-      //If an error occurs with the token in logout, then go to login
-      const responseErrorHandler = error => {
-        if (error.response.status === 401) {
-          localStorage.clear();
-          window.location.replace('http://localhost:3000/login');
-        }
-      
-        return Promise.reject(error);
+    const responseSuccessHandler = response => {
+      return response;
+    };
+    
+    //If an error occurs with the token in logout, then go to login
+    const responseErrorHandler = error => {
+      if (error.response.status === 401) {
+        localStorage.clear();
+        window.location.replace('http://localhost:3000/login');
       }
-      
-      axios.interceptors.response.use(
-        response => responseSuccessHandler(response),
-        error => responseErrorHandler(error)
-      );
+    
+      return Promise.reject(error);
+    }
+    
+    axios.interceptors.response.use(
+      response => responseSuccessHandler(response),
+      error => responseErrorHandler(error)
+    );
   };
 
   return (

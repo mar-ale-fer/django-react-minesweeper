@@ -27,10 +27,7 @@ const Signup = () => {
 
     axios({
       method: 'post',
-      url: 'http://127.0.0.1:8000/api/v1/users/auth/register/',
-      headers: {
-          'content-type': 'application/json'
-      },
+      url: '/users/auth/register/',
       data: JSON.stringify(user)
     })
       .then(response => response.data)

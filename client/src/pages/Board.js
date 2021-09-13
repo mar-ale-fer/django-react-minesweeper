@@ -351,12 +351,9 @@ const Board = () => {
                         <StyledGame columns={game.columns}>
                             <div className="board">
                             <div className="game-info">
-                                <span className="info">mines: {game.mines}</span><br />
+                                <span className="info">Game #{game.id} mines: {game.mines}</span><br />
                                 <span className="info">{gameData.won ? "You Win!" : ""}</span>
                                 <span className="info">{gameData.lost ? "You Lose!" : ""}</span>
-                                <button onClick={()=> saveOnBackend()}>
-                                    save game
-                                </button>
                             </div>
                             {
                                 gameData && gameData.board && (
