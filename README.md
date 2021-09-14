@@ -32,3 +32,5 @@ https://main.drvznpngbg4y4.amplifyapp.com/
 ## Screenshots
 
 ![A won game](https://devigetassets.s3.us-west-2.amazonaws.com/screenshot_game_big.jfif)
+
+![My games](https://devigetassets.s3.us-west-2.amazonaws.com/minesweeper_my_games.png)
