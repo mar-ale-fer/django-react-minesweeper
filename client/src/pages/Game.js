@@ -10,7 +10,7 @@ const Game = () => {
 
   useEffect(() => {
     if (localStorage.getItem('token') === null) {
-      window.location.replace('http://localhost:3000/login');
+      window.location.replace('https://main.drvznpngbg4y4.amplifyapp.com/login');
     } else {
 
       const fetchData = async () => {

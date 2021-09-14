@@ -6,7 +6,7 @@ const Logout = () => {
 
   useEffect(() => {
     if (localStorage.getItem('token') == null) {
-      window.location.replace('http://localhost:3000/login');
+      window.location.replace('https://main.drvznpngbg4y4.amplifyapp.com/login');
     } else {
       setLoading(false);
     }
@@ -17,15 +17,16 @@ const Logout = () => {
 
     axios({
       method: 'post',
-      url: '/users/auth/logout/',
+      url: 'https://djminesbackend.respuestadigital.com.ar/api/v1/users/auth/logout/',
       headers: {
-          Authorization: `Token ${localStorage.getItem('token')}`
+          Authorization: `Token ${localStorage.getItem('token')}`,
+          'Content-Type':'application/json'
       }
     })
     .then(response => response.data)
       .then(data => {
         localStorage.clear();
-        window.location.replace('http://localhost:3000/login');
+        window.location.replace('https://main.drvznpngbg4y4.amplifyapp.com/login');
       });
 
     const responseSuccessHandler = response => {
@@ -36,7 +37,7 @@ const Logout = () => {
     const responseErrorHandler = error => {
       if (error.response.status === 401) {
         localStorage.clear();
-        window.location.replace('http://localhost:3000/login');
+        window.location.replace('https://main.drvznpngbg4y4.amplifyapp.com/login');
       }
     
       return Promise.reject(error);

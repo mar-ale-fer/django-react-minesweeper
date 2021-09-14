@@ -3,8 +3,9 @@ import axios from 'axios';
 
 //Axios global request Headers
 //https://github.com/axios/axios#global-axios-defaults
-axios.defaults.baseURL = 'http://127.0.0.1:8000/api/v1';
-axios.defaults.headers['Content-Type'] = 'application/json';
+
+//development: axios.defaults.baseURL = 'https://127.0.0.1:8000/api/v1';
+//axios.defaults.baseURL = 'djminesbackend.respuestadigital.com.ar/api/v1';
 
 /**
  * load games of the logged user from mines server
@@ -13,9 +14,10 @@ axios.defaults.headers['Content-Type'] = 'application/json';
 export const getGames = () => {
     return axios({
         method: 'get',
-        url: '/users/games/',
+        url: 'https://djminesbackend.respuestadigital.com.ar/api/v1/users/games/',
         headers: {
-          Authorization: `Token ${localStorage.getItem('token')}`
+          Authorization: `Token ${localStorage.getItem('token')}`,
+          'Content-Type':'application/json'
         },
       })
         .then(response => response.data)
@@ -28,9 +30,10 @@ export const getGames = () => {
  export const getLoggedUser = () => {
     return axios({
         method: 'get',
-        url: '/users/auth/user/',
+        url: 'https://djminesbackend.respuestadigital.com.ar/api/v1/users/auth/user/',
         headers: {
-          Authorization: `Token ${localStorage.getItem('token')}`
+          Authorization: `Token ${localStorage.getItem('token')}`,
+          'Content-Type':'application/json'
         },        
       })
         .then(response => response.data)
@@ -44,9 +47,10 @@ export const getGames = () => {
 export const getGameFromBackend = ( gameId ) => {
     return axios({
         method: 'get',
-        url: `/users/games/${gameId}`,
+        url: `https://djminesbackend.respuestadigital.com.ar/api/v1/users/games/${gameId}`,
         headers: {
-          Authorization: `Token ${localStorage.getItem('token')}`
+          Authorization: `Token ${localStorage.getItem('token')}`,
+          'Content-Type':'application/json'
         },
       })
         .then(response => response.data)
@@ -59,9 +63,10 @@ export const getGameFromBackend = ( gameId ) => {
  export const deleteGameFromBackend = ( gameId ) => {
     return axios({
         method: 'delete',
-        url: `/users/games/${gameId}`,
+        url: `https://djminesbackend.respuestadigital.com.ar/api/v1/users/games/${gameId}`,
         headers: {
-          Authorization: `Token ${localStorage.getItem('token')}`
+          Authorization: `Token ${localStorage.getItem('token')}`,
+          'Content-Type':'application/json'
         },
       })
 }
@@ -74,9 +79,10 @@ export const getGameFromBackend = ( gameId ) => {
 export const createGameInBackend = ( newGameData ) => {
     return axios({
         method: 'post',
-        url: `/users/games/`,
+        url: `https://djminesbackend.respuestadigital.com.ar/api/v1/users/games/`,
         headers: {
-          Authorization: `Token ${localStorage.getItem('token')}`
+          Authorization: `Token ${localStorage.getItem('token')}`,
+          'Content-Type':'application/json'
         },
         data: JSON.stringify({
             useremail: newGameData.useremail,
@@ -101,9 +107,10 @@ export const saveGameInBackend = (gameId, state, state_board) => {
     console.log(state_board_json);
     return axios({
         method: 'put',
-        url: `/users/games/${gameId}/`,
+        url: `https://djminesbackend.respuestadigital.com.ar/api/v1/users/games/${gameId}/`,
         headers: {
-          Authorization: `Token ${localStorage.getItem('token')}`
+          Authorization: `Token ${localStorage.getItem('token')}`,
+          'Content-Type':'application/json'
         },
         data: JSON.stringify({
             state,

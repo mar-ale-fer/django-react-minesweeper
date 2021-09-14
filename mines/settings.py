@@ -56,7 +56,7 @@ INSTALLED_APPS = [
 ]
 
 CORS_ALLOWED_ORIGINS = [
-    'http://localhost:3000'
+    'https://main.drvznpngbg4y4.amplifyapp.com/'
 ]
 
 MIDDLEWARE = [

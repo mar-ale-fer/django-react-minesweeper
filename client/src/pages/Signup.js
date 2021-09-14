@@ -10,7 +10,7 @@ const Signup = () => {
 
   useEffect(() => {
     if (localStorage.getItem('token') !== null) {
-      window.location.replace('http://localhost:3000/game');
+      window.location.replace('https://main.drvznpngbg4y4.amplifyapp.com/game');
     } else {
       setLoading(false);
     }
@@ -27,7 +27,10 @@ const Signup = () => {
 
     axios({
       method: 'post',
-      url: '/users/auth/register/',
+      url: 'https://djminesbackend.respuestadigital.com.ar/api/v1/users/auth/register/',
+      headers: {
+        'Content-Type':'application/json'
+      },
       data: JSON.stringify(user)
     })
       .then(response => response.data)
@@ -35,7 +38,7 @@ const Signup = () => {
         if (data.key) {
           localStorage.clear();
           localStorage.setItem('token', data.key);
-          window.location.replace('http://localhost:3000/game');
+          window.location.replace('https://main.drvznpngbg4y4.amplifyapp.com/game');
         } else {
           setEmail('');
           setPassword1('');
