@@ -24,7 +24,11 @@ The priority is to reveal the risks early. The first tasks for me are the riskie
 7.  Back on the game list, the user can play another game. Also can delete a game.
 
 ## Bug
-In the signup, please use a Medium level password, like Marcelo12345, as the weak password error catch is missing.
+In the signup, please use a Medium level password, like Marcelo12345, as the weak password error catch is missing. doubts, email me to mar.ale.fer@gmail.com.
 
 ## Test the game!!
 https://main.drvznpngbg4y4.amplifyapp.com/
+
+## Screenshots
+
+![A won game](https://devigetassets.s3.us-west-2.amazonaws.com/screenshot_game_big.jfif)
