@@ -23,6 +23,8 @@ The priority is to reveal the risks early. The first tasks for me are the riskie
 6.  The match is saved in every action of the user. Al all times the user can leave the game, closing the brower tab, or going back in the browser, or using the "Games" option in the upper left corner.
 7.  Back on the game list, the user can play another game. Also can delete a game.
 
+## Bug
+In the signup, please use a Medium level password, like Marcelo12345, as the weak password error catch is missing.
 
-Test the game!!
+## Test the game!!
 https://main.drvznpngbg4y4.amplifyapp.com/
